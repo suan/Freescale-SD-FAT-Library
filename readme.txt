@@ -6,7 +6,7 @@ This is free software; you can redistribute it and/or modify it under the terms 
 (I am in no way affiliated with Freescale Semiconductor Inc. The use of "Freescale" in the title is merely to indicate that this software is made to be used with their products.)
 
 == Foreword ==
-Although there are many FAT libraries out there written for SD card microcontroller interfacing, I found it hard to port them to the Freescale 9S12C32 and CodeWarrior. This library aims to fill that void, and it is specifically designed to be as “plug-and-play” as possible with 16-bit Freescale microcontrollers and CodeWarrior.
+Although there are many FAT libraries out there written for SD card microcontroller interfacing, I found it hard to port them to the Freescale 9S12C32 and CodeWarrior. This simple library aims to fill that void, and it is specifically designed to be as “plug-and-play” as possible with 16-bit Freescale microcontrollers and CodeWarrior.
 These functions are extremely light on memory usage, and run fine on a system with 2KB memory or less. However this comes at the expense of speed, as there is virtually no caching being used. As such this library is fine for basic usage but is hardly suitable for applications where read/write speed is a priority.
 
 == Features ==
@@ -55,3 +55,6 @@ Includes
 == Tips for SD card interfacing beginners ==
 - *Get your hardware down first!* This goes for other hardware aspects too. I've wasted whole days debugging only to find out that my connections were loose!
 - *Not all SD cards are created equal* Its sad, but from my limited experience the combination of less-than-commercial-grade SD card readers and SD interfacing software means that many more finicky SD cards simply won't respond correctly, even though they will work fine on say, a laptop SD card reader. Personally the SD card that has been the most reliable for me is a PenDrive brand 256MB card. When in doubt, I'm sure SanDisk SD cards would be your best bet.
+
+== Bugs and feedback ==
+Please email yeosuanaik@gmail.com if you find any bugs, have any feedback or have feature requests. I would be very happy if anybody found this useful!
