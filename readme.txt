@@ -1,4 +1,4 @@
-== Freescale SD FAT Library (<Place github link here>) ==
+== Freescale SD FAT Library (http://github.com/suan/Freescale-SD-FAT-Library) ==
 ------------------------
 Copyright (c) 2010 by Suan-Aik Yeo <yeosuanaik@gmail.com>
 This is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
