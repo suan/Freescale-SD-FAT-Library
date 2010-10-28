@@ -260,7 +260,7 @@ word clear_FAT(byte* buf, word cluster)
     return 0;
   }
   
-  ori_cluster = (word)(buf + (abs_addr % 512));
+  memreverse(buf + (abs_addr % 512), &ori_cluster, 2);
   
   memmove(buf + (abs_addr % 512), (word)0, 2);
   if (!write_block(buf, sec_start))

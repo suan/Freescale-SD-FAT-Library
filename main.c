@@ -98,6 +98,24 @@ void main(void)
     for(;;);
   }
   
+  // open file3, using file1's descriptor
+  if (!file_open("FILE3.TXT", &fd1, SEEK_START))
+  {
+    #if DEBUG
+    pmsg("Failed to create file FILE3.TXT!\r\n");
+    #endif
+    for(;;);
+  }
+  
+  // write to file3
+  if(file_write(&fd1, str, strlen(str)) != strlen(str))
+  {
+    #if DEBUG
+    pmsg("problem writing to file FILE3.TXT!\r\n");
+    #endif
+    for(;;);
+  }
+  
   #if DEBUG        
   pmsg("File operations successful!\r\n");
   #endif
