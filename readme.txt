@@ -10,7 +10,7 @@ Although there are many FAT libraries out there written for SD card microcontrol
 These functions are extremely light on memory usage, and run fine on a system with 2KB memory or less. However this comes at the expense of speed, as there is virtually no caching being used. As such this library is fine for basic usage but is hardly suitable for applications where read/write speed is a priority.
 
 == Features ==
-- Performs basic file reading and writing 
+- Performs basic file reading, writing, and file deletion
 - Very low memory usage
 - Tailor-made for CodeWarrior and Freescale microcontrollers
 
