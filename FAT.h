@@ -49,6 +49,8 @@ word get_unused_cluster(byte* buf);
 dword get_empty_dir_entry(byte* buf);
 byte create_dir_entry(dir_entry_t* de, char* filename, byte fn_length, byte* buf);
 byte write_dir_entry(dir_entry_t* de, byte* buf);
+byte invalidate_dir_entry(dir_entry_t* de, byte* buf);
+word clear_FAT(byte* buf, word cluster);
 byte update_FAT(byte* buf, word cluster, word value);
 void prtn_set_addr(byte* bootSec, dword partition_addr);
 byte getFile(dir_entry_t* de, byte* buf, char* filename, byte length);

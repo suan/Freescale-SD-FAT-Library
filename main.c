@@ -24,6 +24,11 @@ void main(void)
   char *str = "The quick brown fox jumps over the lazy dog!";
   char str_buf[50];
 
+  byte int_size;
+  byte word_size;
+  int_size = sizeof(int);
+  word_size = sizeof(word);
+
   // initialize system
   init();
   #if DEBUG
@@ -80,6 +85,15 @@ void main(void)
   {
     #if DEBUG
     pmsg("problem writing to file!\r\n");
+    #endif
+    for(;;);
+  }
+  
+  // delete file1
+  if (!file_delete(&fd1))
+  {
+    #if DEBUG
+    pmsg("problem deleting to file1!\r\n");
     #endif
     for(;;);
   }

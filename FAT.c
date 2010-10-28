@@ -100,7 +100,7 @@ dword get_empty_dir_entry(byte* buf)
     b = read_block(buf, prtn.root_dir_addr + i*512);
     for(j=0;j<16;j++)
     {
-      if(buf[j*32] == 0x00)
+      if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
       {
         #if DEBUG
         pmsg("found empty direntry at addr: 0x"); disdword(prtn.root_dir_addr + i*512 + j*32); pmsg("\r\n");
@@ -208,6 +208,12 @@ byte write_dir_entry(dir_entry_t* de, byte* buf)
   return 1;
 }
 
+byte invalidate_dir_entry(dir_entry_t* de, byte* buf)
+{
+  de->filename[0] = 0xe5;
+  return write_dir_entry(de, buf);
+}
+
 // make FAT[_cluster_] point to cluster _value_
 byte update_FAT(byte* buf, word cluster, word value)
 {
@@ -235,6 +241,37 @@ byte update_FAT(byte* buf, word cluster, word value)
   }
   
   return 1;
+}
+
+// sets FAT[_cluster_] to 0x00 and returns FAT[_cluster_]'s original value
+word clear_FAT(byte* buf, word cluster)
+{
+  dword abs_addr;
+  dword sec_start;
+  word ori_cluster;
+
+  abs_addr = prtn.FAT_addr + cluster*2;
+  sec_start = abs_addr - (abs_addr % 512);
+  if(!read_block(buf, sec_start))
+  { 
+    #if DEBUG
+    pmsg("Problem clearing FAT!\r\n");
+    #endif
+    return 0;
+  }
+  
+  ori_cluster = (word)(buf + (abs_addr % 512));
+  
+  memmove(buf + (abs_addr % 512), (word)0, 2);
+  if (!write_block(buf, sec_start))
+  {
+    #if DEBUG
+    pmsg("Problem clearing FAT!\r\n");
+    #endif
+    return 0;
+  }
+  
+  return ori_cluster;
 }
 
 // converts a file offset position to the actual address of the corresponding sector

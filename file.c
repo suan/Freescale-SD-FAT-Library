@@ -293,3 +293,30 @@ word file_read(file_descriptor_t *fd, char *buf, word length)
   
   return bytes_read;
 }
+
+byte file_delete(file_descriptor_t* fd)
+{
+  word clus = fd->dir_entry.first_cluster;
+
+  do
+  {
+    clus = clear_FAT(g_block_buf, clus);
+    if (!clus)
+    {
+      #if DEBUG
+      pmsg("Deleting file failed because there was a 0x00 in its FAT chain!\r\n");
+      #endif
+      return 0;
+    }
+  } while (clus < 0xfff8);
+  
+  if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
+  {
+    #if DEBUG
+    pmsg("Deleting file failed while invalidating directory entry!\r\n");
+    #endif
+    return 0;
+  }
+  
+  return 1;
+}
