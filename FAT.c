@@ -280,7 +280,7 @@ dword get_sec_addr(word cluster, dword position)
   dword clus_addr;
   
   // data area starts from the 2nd cluster
-  clus_addr = prtn.data_addr + prtn.clus_size*(cluster - 2);
+  clus_addr = prtn.data_addr + prtn.clus_size*((dword)cluster - 2);
   return (clus_addr + position%prtn.clus_size - position%512);
 }
 
