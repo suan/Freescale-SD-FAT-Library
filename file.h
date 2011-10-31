@@ -26,6 +26,7 @@ byte file_open(char* filename, file_descriptor_t* fd, byte start_pos);
 word file_read(file_descriptor_t *fd, char *buf, word length);
 word file_write(file_descriptor_t* fd, char* write_str, word length);
 byte file_seek(file_descriptor_t *fd, byte to);
+byte file_seek_to_offset(file_descriptor_t *fd, dword offset);
 byte init_FAT_fs(void);
 byte file_delete(file_descriptor_t* fd);
 

@@ -68,6 +68,45 @@ byte file_seek(file_descriptor_t *fd, byte to)
 }
 
 /*
+ * set file position to the offset position
+ */
+byte file_seek_to_offset(file_descriptor_t *fd, dword offset)
+{
+  word clus;
+
+  if (offset > fd->dir_entry.filesize)
+  {
+    #if DEBUG
+    pmsg("offset position is bigger than file size!\r\n");
+    #endif
+    return 0;
+  }
+  
+  while (fd->position != offset)
+  {
+    if (offset - fd->position < prtn.clus_size)
+    {
+      fd->position = offset;
+    }
+    else
+    {
+      fd->position += prtn.clus_size - fd->position%prtn.clus_size;
+      clus = next_clus(fd->cluster, g_block_buf);
+      if (!clus)
+      {
+        #if DEBUG
+        pmsg("file_seek_to_offset failed when seeking to next cluster!\r\n");
+        #endif
+        return 0;
+      }
+      fd->cluster = clus;
+    }
+  }
+  
+  return 1;
+}
+
+/*
  * open a file for reading/writing. File has to be in the root directory.
  * If it does not exist, it will be created. An example argument for _filename_
  * is "test.txt". Filenames will be converted to all uppercase to adhere to the
