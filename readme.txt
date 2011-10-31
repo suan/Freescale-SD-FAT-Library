@@ -20,7 +20,6 @@ These functions are extremely light on memory usage, and run fine on a system wi
 - No SDHC support
 - No long filename (lfn) support (filenames cannot exceed 8 characters. Please refer to http://en.wikipedia.org/wiki/8.3_filename for more information.)
 - No directory support (Can only deal with files in the root/home directory)
-- No file features such as deletion and renaming
 
 == Instructions ==
 1) Insert the source files into your CodeWarrior project. This is how my project structure looks under CodeWarrior 5.9.0 (Specially marked entries are files that are not part of this library, but rather should be created by CodeWarrior when you create a new project):
